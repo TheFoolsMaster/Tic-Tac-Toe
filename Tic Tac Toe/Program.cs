@@ -5,8 +5,9 @@ namespace Tic_Tac_Toe
     internal class GameTicTacToe
     {
         /*TO DO
-         * Refactoring the player input 
-         * Refactoring the game restart
+         * Refactoring the PlayerInput()
+         * Changing the size of the board
+         * Refactoring the WinChecker()
         */
 
         // names of players
@@ -17,7 +18,7 @@ namespace Tic_Tac_Toe
         static char playerSymbol2 = 'O';
         // which element of the board is changed
         static int elementOfBoard;
-        //initall board
+        //this is a main game board that we are modifying  
         static char[,] gameBoard = new char[,]
         {
             {'1','2','3'},
@@ -47,127 +48,145 @@ namespace Tic_Tac_Toe
         /// <param name="playerSymbol"></param>
         static void PlayerInput(string playerNumber,char playerSymbol)
         {
-            Console.WriteLine("{0}: Plese enter {1}", playerNumber, playerSymbol);
-            Int32.TryParse(Console.ReadLine(), out elementOfBoard);
-            switch (elementOfBoard)
+            Console.WriteLine("{0}: Please enter an integer value from 1 to 9 to place {1}", playerNumber, playerSymbol);
+            if (Int32.TryParse(Console.ReadLine(), out elementOfBoard) && 0 <= elementOfBoard && elementOfBoard <= 9) 
             {
-                case 1:
-                    if(gameBoard[0, 0] == '1')
-                    {
-                        gameBoard[0, 0] = playerSymbol;
-                    }
-                    else
-                    {
-                        PlayerInput(playerNumber, playerSymbol);
-                    }
-                    break;
-                case 2:
-                    if (gameBoard[0, 1] == '2')
-                    {
-                        gameBoard[0, 1] = playerSymbol;
-                    }
-                    else
-                    {
-                        PlayerInput(playerNumber, playerSymbol);
-                    }
-                    break;
-                case 3:
-                    if (gameBoard[0, 2] == '3')
-                    {
-                        gameBoard[0, 2] = playerSymbol;
-                    }
-                    else
-                    {
-                        PlayerInput(playerNumber, playerSymbol);
-                    }
-                    break;
-                case 4:
-                    if (gameBoard[1, 0] == '4')
-                    {
-                        gameBoard[1, 0] = playerSymbol;
-                    }
-                    else
-                    {
-                        PlayerInput(playerNumber, playerSymbol);
-                    }
-                    break;
-                case 5:
-                    if (gameBoard[1, 1] == '5')
-                    {
-                        gameBoard[1, 1] = playerSymbol;
-                    }
-                    else
-                    {
-                        PlayerInput(playerNumber, playerSymbol);
-                    }
-                    break;
-                case 6:
-                    if (gameBoard[1, 2] == '6')
-                    {
-                        gameBoard[1, 2] = playerSymbol;
-                    }
-                    else
-                    {
-                        PlayerInput(playerNumber, playerSymbol);
-                    }
-                    break;
-                case 7:
-                    if (gameBoard[2, 0] == '7')
-                    {
-                        gameBoard[2, 0] = playerSymbol;
-                    }
-                    else
-                    {
-                        PlayerInput(playerNumber, playerSymbol);
-                    }
-                    break;
-                case 8:
-                    if (gameBoard[2, 1] == '8')
-                    {
-                        gameBoard[2, 1] = playerSymbol;
-                    }
-                    else
-                    {
-                        PlayerInput(playerNumber, playerSymbol);
-                    }
-                    break;
-                case 9:
-                    if (gameBoard[2, 2] == '9')
-                    {
-                        gameBoard[2, 2] = playerSymbol;
-                    }
-                    else
-                    {
-                        PlayerInput(playerNumber, playerSymbol);
-                    }
-                    break;
+                switch (elementOfBoard)
+                {
+                    case 1:
+                        if(gameBoard[0, 0] == '1')
+                        {
+                            gameBoard[0, 0] = playerSymbol;
+                        }
+                        else
+                        {
+                            PlayerInput(playerNumber, playerSymbol);
+                        }
+                        break;
+                    case 2:
+                        if (gameBoard[0, 1] == '2')
+                        {
+                            gameBoard[0, 1] = playerSymbol;
+                        }
+                        else
+                        {
+                            PlayerInput(playerNumber, playerSymbol);
+                        }
+                        break;
+                    case 3:
+                        if (gameBoard[0, 2] == '3')
+                        {
+                            gameBoard[0, 2] = playerSymbol;
+                        }
+                        else
+                        {
+                            PlayerInput(playerNumber, playerSymbol);
+                        }
+                        break;
+                    case 4:
+                        if (gameBoard[1, 0] == '4')
+                        {
+                            gameBoard[1, 0] = playerSymbol;
+                        }
+                        else
+                        {
+                            PlayerInput(playerNumber, playerSymbol);
+                        }
+                        break;
+                    case 5:
+                        if (gameBoard[1, 1] == '5')
+                        {
+                            gameBoard[1, 1] = playerSymbol;
+                        }
+                        else
+                        {
+                            PlayerInput(playerNumber, playerSymbol);
+                        }
+                        break;
+                    case 6:
+                        if (gameBoard[1, 2] == '6')
+                        {
+                            gameBoard[1, 2] = playerSymbol;
+                        }
+                        else
+                        {
+                            PlayerInput(playerNumber, playerSymbol);
+                        }
+                        break;
+                    case 7:
+                        if (gameBoard[2, 0] == '7')
+                        {
+                            gameBoard[2, 0] = playerSymbol;
+                        }
+                        else
+                        {
+                            PlayerInput(playerNumber, playerSymbol);
+                        }
+                        break;
+                    case 8:
+                        if (gameBoard[2, 1] == '8')
+                        {
+                            gameBoard[2, 1] = playerSymbol;
+                        }
+                        else
+                        {
+                            PlayerInput(playerNumber, playerSymbol);
+                        }
+                        break;
+                    case 9:
+                        if (gameBoard[2, 2] == '9')
+                        {
+                            gameBoard[2, 2] = playerSymbol;
+                        }
+                        else
+                        {
+                            PlayerInput(playerNumber, playerSymbol);
+                        }
+                        break;
+                }                
+            }
+            else
+            {
+                PlayerInput(playerNumber, playerSymbol);
             }
         }
         /// <summary>
         /// Checks if one of the player wins the round
         /// </summary>
         /// <returns></returns>
-        static bool WinChecker()
+        static bool WinChecker(string playerNumber)
         {
             for (int i = 0; i < gameBoard.GetLength(0); i++)
             {
                 if(gameBoard[i,0] == gameBoard[i, 1] && gameBoard[i, 1] == gameBoard[i, 2])
                 {
+                    Console.WriteLine("{0} won the game",playerNumber);
                     return true;
                 }
                 if (gameBoard[0, i] == gameBoard[1, i] && gameBoard[1, i] == gameBoard[2, i])
                 {
+                    Console.WriteLine("{0} won the game", playerNumber);
                     return true;
                 }
             }
             if(gameBoard[0, 0] == gameBoard[1, 1]&& gameBoard[1, 1]== gameBoard[2, 2])
             {
+                Console.WriteLine("{0} won the game", playerNumber);
                 return true;
             }
             if (gameBoard[0, 2] == gameBoard[1, 1] && gameBoard[1, 1] == gameBoard[2, 0])
             {
+                Console.WriteLine("{0} won the game", playerNumber);
                 return true;
             }
+            //This if statment checks for a draw in a game
+            if (FullBoard())
+            {
+                Console.WriteLine("Draw");
+                GameRestart();
+                return false;
+            }
+
             return false;
         }
 
@@ -178,24 +197,14 @@ namespace Tic_Tac_Toe
         {
             Console.WriteLine("");
             Console.WriteLine("Restarting the game");
-            /*
-            for(int i = 0; i < gameBoard.GetLength(0); i++)
+            //initall board
+            char[,] initialGameBoard = new char[,]
             {
-                for(int j = 0 ; j < gameBoard.GetLength(1); j++)
-                {
-
-                }
-            }
-            */
-            gameBoard[0, 0] = '1';
-            gameBoard[0, 1] = '2';
-            gameBoard[0, 2] = '3';
-            gameBoard[1, 0] = '4';
-            gameBoard[1, 1] = '5';
-            gameBoard[1, 2] = '6';
-            gameBoard[2, 0] = '7';
-            gameBoard[2, 1] = '8';
-            gameBoard[2, 2] = '9';
+                {'1','2','3'},
+                {'4','5','6'},
+                {'7','8','9'}
+            };
+            gameBoard = initialGameBoard;
             Console.WriteLine("Press any key to continue");
             Console.ReadLine();
         }
@@ -213,15 +222,30 @@ namespace Tic_Tac_Toe
         /// </summary>
         /// <param name="playerNumber"></param>
         /// <param name="playerSymbol"></param>
-        private static void Round(string playerNumber,char playerSymbol)
+        static void Round(string playerNumber,char playerSymbol)
         {
             Console.Clear();
             Board();
             PlayerInput(playerNumber, playerSymbol);
-            if (WinChecker())
+            if (WinChecker(playerNumber))
             {
                 GameRestart();
             }
+        }
+        /// <summary>
+        /// Checks if any space on the board is free for 'X' or 'O'.
+        /// </summary>
+        /// <returns></returns>
+        static bool FullBoard()
+        {
+            foreach(char i in gameBoard)
+            {
+                if (!(i == 'X' || i == 'O'))
+                {
+                    return false;
+                } 
+            }
+            return true;
         }
     }
 }
